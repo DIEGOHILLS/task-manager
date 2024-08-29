@@ -1,0 +1,17 @@
+// form.pug
+- isEditing = () => !(Object.keys(task).length === 0)
+
+h2=isEditing() ? "Edit Task" : "New Task"
+
+form(
+  action=isEditing() ? `/update/${task.id}?_method=PUT` : '/tasks',
+  method='POST'
+)
+  label(for='title') Title:
+  input#title(type='text', name='title', required, value=task.title)
+
+  label(for='description') Description:
+  textarea#description(name='description', required) #{task.description}
+
+  div.actions
+    button(type='submit') Submit

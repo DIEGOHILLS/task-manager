@@ -1,0 +1,21 @@
+// task.pug
+h2 #{task.title}
+
+p
+  strong Title:
+  |  #{task.title}
+
+p
+  strong Description:
+  |  #{task.description}
+
+div.actions
+  form(method='POST', action=`/delete/${task.id}?_method=DELETE`)
+    button(type='submit' class='link') Delete Task
+
+  a(
+    href=`/tasks/${task.id}/edit`,
+    hx-get=`/tasks/${task.id}/edit`,
+    hx-push-url='true',
+    hx-target='#content'
+  ) Edit Task

@@ -1,0 +1,24 @@
+// Displays the details of a single task
+h2 #{task.title}
+
+p #[strong Title:] #{task.title}
+p #[strong Description:] #{task.description}
+
+div.actions
+  // Form to delete the task
+  form(method='POST', action=`/delete/${task.id}?_method=DELETE`)
+    button(
+      type='submit',
+      hx-delete=`/delete/${task.id}`,
+      hx-target='#sidebar',
+      hx-push-url='/tasks'
+      class='link'
+    ) Delete Task
+
+  // Link to edit the task
+  a(
+    href=`/tasks/${task.id}/edit`,
+    hx-get=`/tasks/${task.id}/edit`,
+    hx-push-url='true',
+    hx-target='#content'
+  ) Edit Task
